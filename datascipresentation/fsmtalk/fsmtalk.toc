@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Introduction to FSM}{3}{0}{1}
+\beamer@sectionintoc {2}{Uses in Computational Linguistics}{27}{0}{2}
+\beamer@sectionintoc {4}{Uses in NLP (search)}{65}{0}{3}
+\beamer@sectionintoc {5}{Wrap-up}{102}{0}{4}

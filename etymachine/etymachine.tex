@@ -1,0 +1,706 @@
+\documentclass[10pt]{beamer}
+
+\usetheme{metropolis}
+\usepackage{appendixnumberbeamer}
+
+% % fsts
+% \usepackage{tikz}
+% strikethrough
+\usepackage[normalem]{ulem}
+% code listing thing
+\usepackage{listings}
+
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+
+\usepackage{gb4e}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\graphicspath{{figs/}}
+
+\title{Etymachine}
+\subtitle{The Etymological Machine}
+\date{25 February 2017}
+\author{Trevor Sullivan}
+\institute{University of Arizona}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\begin{document} 
+
+\maketitle
+
+% \begin{frame}{Table of contents}
+%   \setbeamertemplate{section in toc}[sections numbered]
+%   \tableofcontents[hideallsubsections]
+% \end{frame}
+
+\begin{frame}[fragile]{The Problem}
+
+  \includegraphics[width=8cm]{badchart.png}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The Problem}
+
+  \begin{itemize}[<+->]
+      \item talaric \pause (of the ankle)
+      \item thallasocracy \pause (reign of the water)
+      \item lexiphanicism \pause (using too many words)
+      \item foudroyant \pause (sudden)
+      \item rynchosporous \pause (having pointy fruit)
+      \item nepheligenous \pause (discharging smoke)
+      \item tachyphylaxis \pause (rapid immunity)
+      \item calcoprapher \pause (someone who draws with crayons)
+    \end{itemize}  
+\end{frame}
+
+
+\begin{frame}[fragile]{The Problem}
+  
+  \pause
+  \centerline{\includegraphics[width=10cm]{blogcharts.png}}
+
+  Based on a very small corpus, one paragraph each
+  
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Goal}
+  \pause
+  To construct a machine that can make a chart of the etymological content of a text on the fly. 
+
+  \pause
+
+  New problem: there is no database of etymological classifications
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Constructing a Database}
+  \pause
+
+  Source: Etymonline.com, the Online Etymological Dictionary
+
+  \pause
+  \centerline{\includegraphics[width=10cm]{etymonlinehomepage.png}}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Constructing a Database}
+
+  Etymonline has lots of etymological entries, but they are not neatly categorized into the source language of each.
+  
+  This is categorization problem, but the categories are obscured in the source data. Rather than trying to do unsupervised learning to it, I chose to attempt to approximate a golden dataset using a deterministic process, and then use that for machine learning. 
+  
+\end{frame}
+
+\begin{frame}[fragile]{Constructing a Database}
+  Languages investigated 
+
+  \begin{itemize}[<+->]
+  \item Old English
+  \item French 
+  \item Old Norse
+  \item Latin
+  \item Greek
+  \item Other
+  \end{itemize}
+
+\pause
+  Some of these have a relationship to each other, as in the following definition
+
+
+  \begin{description}
+  \item[polysemy] 1900, from French polysémie, from Medieval Latin polysemus, from Greek polysemos, from poly- + sema
+  \end{description}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Chains}
+  
+  French $>$ Middle French $>$ Old French $>$ Medieval Latin $>$ Latin $>$ Greek $>$ PIE
+
+  Greek(modern, koine, classical) $>$ PIE
+
+  Old English $>$ Ingvaeonic (Old Frisian, Old Saxon) $>$ Proto-West-Germanic $>$ Proto-Germanic $>$ PIE
+  
+
+  Old Norse $>$ Proto-North-Germanic $>$ Proto-Germanic $>$ PIE
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Problem: links}
+  
+  Problem: many dictionary entries take the form 
+
+\begin{description}
+\item[alumna] see \textbf{alumnus}
+\end{description}
+
+This means that our analysis will have to collapse these "two words that are really just one word" into a single element, and then be able to un-collapse them when the actual analysis of a real text is performed. 
+
+\pause
+
+This is fixed by using the data we have to find these ``links'' and then just filling the linked defintion into the linker's definition space. This happens roughly 260 times
+
+\end{frame}
+
+\begin{frame}[fragile]{Problem: hidden links}
+  
+The "other" category is large because of definitions like this:
+\pause
+\begin{verbatim}
+Word:  curvy (adj.)  Category:  Other
+Definition:  1902, from curve (n.) + -y (2). Related: Curviness.
+
+\end{verbatim}
+\pause
+This might be fixable by searching for these ``from'' and ``form of'' type expressions and treating them like links recursively
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{frame}[fragile]{Pattern match categorization results}
+  
+% \begin{verbatim}
+% English:  4334  percent of total:   9.47
+% French:  10312  percent of total:  22.55
+% Norse:    2039  percent of total:   4.45
+% Latin:    6401  percent of total:  13.99
+% Greek:    1213  percent of total:   2.65
+% Other:   21424  percent of total:  46.85
+
+% \end{verbatim}
+
+% \end{frame}
+
+% \begin{frame}[fragile]{Pattern match categorization results}
+  
+%   \centerline{\includegraphics[width=8cm]{badchart.png}}
+
+% \end{frame}
+
+
+% \begin{frame}[fragile]{Pattern match categorization results}
+  
+% The "other" category is large because of definitions like this:
+% \pause
+% \begin{verbatim}
+% Word:  curvy (adj.)  Category:  Other
+% Definition:  1902, from curve (n.) + -y (2). Related: Curviness.
+
+% \end{verbatim}
+% \pause
+% This might be fixable by searching for these ``from'' and ``form of'' type expressions and treating them like links recursively
+
+% \end{frame}
+
+
+
+\begin{frame}[fragile]{Second try}
+\pause
+\begin{verbatim}
+English:  11300  percent of total:  24.71
+French:   12712  percent of total:  27.80
+Norse:      495  percent of total:   1.08
+Latin:     6946  percent of total:  15.19
+Greek:     1465  percent of total:   3.20
+Other:    11131  percent of total:  24.34
+Total:    45723
+
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Pattern match categorization results}
+  
+  \centerline{\includegraphics[width=8cm]{badchart.png}}
+
+\end{frame}
+
+\section{Machine Learning}
+
+\begin{frame}[fragile]{Machine Learning attempts}
+  
+  Support Vector Machine
+
+  \centerline{\includegraphics[width=7.5cm]{svmillustration.png}}
+
+\end{frame}
+
+\begin{frame}[fragile]{Selecting features}
+  
+  \begin{itemize}[<+->]
+    \item Bag-of-words
+    \item What characters are present
+    \item First attested century
+    \item Syllables present
+    \item Bigrams
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Selecting features}
+  
+  \begin{itemize}
+    \item \textcolor{green}{Bag-of-words}
+    \item \textcolor{green}{What characters are present}
+    \item \textcolor{green}{First attested century}
+    \item \textcolor{green}{Syllables present}
+    \item Bigrams
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Extracting Features}
+
+(conscript)
+ 
+\pause
+
+\begin{description}[<+->]
+  \item[Bag-of-Words] 159644 dimensional sparse vector, where each dimension is a word count. The language names (English, French, Norse, Latin, Greek) are not counted. 
+
+  eg, \{simplicity: 1, participle: 2, literally: 1, genea: 0\}
+
+  \item[Characters] 80 dimensional sparse vector, where each dimension is a binary indicator of whether a character is present or not. 
+
+  eg \{i: 1, 1: 1, .: 1, a: 1, h: 1, ð: 0, þ: 0\} 
+
+  \item[Century] 1-dimensional vector, simply a number corresponding to the first two digits of the century, found by searching for the first 3 or 4-digit number, or ``#th/nd/st'' 
+
+  eg [15]
+
+  \item[Syllable] 7588 dimensional vector, Moses statistical machine-translation module based on CELEX, courtesy of Jungyeul Park. 
+
+  eg \{script: 1, ress: 0, thaw: 0, con: 1\}
+\end{description}
+  
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}[fragile]{Selecting Model Parameters}
+  
+    \centerline{\includegraphics[width=7.5cm]{svmillustration.png}}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Selecting Model Parameters}
+  
+    \centerline{\includegraphics[height=7.5cm]{svmcircles.png}}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Selecting Model Parameters}
+  
+    \centerline{\includegraphics[width=11cm]{implicitprojection.png}}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Selecting Model Parameters}
+  
+    \centerline{\includegraphics[width=10cm]{kernels.png}}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Results with default RBF kernel}
+  
+\begin{tabular}{l c}
+   Featureset & Accuracy \\
+   \hline
+   BoW & 44\% \\
+   BoW + characters & 46\% \\
+   BoW + characters + centuries & 47\% \\
+\end{tabular}
+
+\end{frame}
+
+
+% \begin{frame}[fragile]{Results with default RBF kernel}
+%   \pause
+
+%   \centerline{\includegraphics[width=10cm]{figure1.png}}
+
+  
+% \end{frame}
+
+
+% \begin{frame}[fragile]{Results with poly kernel}
+  
+
+%   \centerline{\includegraphics[width=10cm]{figure3.png}}
+
+  
+% \end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{Results with linear kernel}
+  
+\begin{tabular}{l c}
+  Dataset & F-score \\
+  \hline
+  BoW & 88.96\% \\
+  BoW + characters & 89.08\% \\
+  BoW + characters + centuries & 89.15\% \\
+    
+\end{tabular}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Results with linear kernel}
+  
+\centering
+\begin{tabular}{l c}
+  \hline
+  Features & Accuracy \\
+  \hline
+  Syllables & 0.48 \\
+  BagofWords & 0.71 \\
+  Characters & 0.72 \\
+  Syllables + BagofWords & 0.73 \\
+  Syllables + Characters & 0.75 \\
+  BagofWords + Characters & 0.81 \\
+  BagofWords + Characters + Syllables & 0.82 \\
+  Syllables + Characters + Century & 0.75 \\
+  BagofWords + Characters + Century & 0.81 \\
+  All Four Features & 0.82 \\
+
+  \hline
+\end{tabular}
+
+\end{frame}
+
+
+
+
+% \begin{frame}[fragile]{Results with linear kernel}
+%   \pause
+
+%   \centerline{\includegraphics[width=10cm]{figs2/figure3.png}}
+
+  
+% \end{frame}
+
+
+
+
+% \begin{frame}[fragile]{Normalization}
+%   \pause
+%   \centerline{\includegraphics[width=10cm]{figs2/figure4.png}}
+
+  
+% \end{frame}
+
+
+\begin{frame}[fragile]{Lexicon}
+
+  \pause
+  \centerline{\includegraphics[width=10cm]{statcategorizedlexiconpie.png}}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Lexicon}
+
+  \centerline{\includegraphics[width=8cm]{badchart.png}}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Other? (12209)}
+
+['discography (n.)', 'governmental (adj.)', 'shinny (n.)', 'red herring (n.)', 'play-dough (n.)', 'disorientation (n.)', 'prophetess (n.)', 'industrialisation (n.)', 'quirky (adj.)', 'uncirculated (adj.)', 'transmittal (n.)', 'Guinevere', 'acridity (n.)', 'lit (n.2)', 'Lee-Enfield', 'prat (n.)', 'duffel', 'karyotype (n.)', 'Clarisse', 'movies (n.)', 'sporran (n.)', 'piss-pot (n.)', 'merman (n.)', 'animalism (n.)', 'glow (n.)', 'consortia (n.)', 'Levantine (adj.)', 'linguistic (adj.)', 'mutagen (n.)', 'masochistic (adj.)', 'profusive (adj.)', 'blur (v.)', 'quizzical (adj.)', 'flap (n.)', 'unheeded (adj.)', 'realistic (adj.)', 'proselytization (n.)', 'po-face (adj.)', 'maturate (v.)', 'time-out (n.)', 'unrestricted (adj.)', 'Sheol (n.)', 'usb', 'impermanent (adj.)', 'deterministic (adj.)', 'misappropriation (n.)', 'Gabriel', 'clabber (n.)', 'inauthentic (adj.)', 'Nathan', 'Chinaman (n.)', 'extremism (n.)', 'metrosexual (adj.)', 'wham (n.)', 'chad (n.3)', 'demarcate (v.)', 'shivaree (n.)', 'knack (n.)', 'spherical (adj.)', "Hell's Kitchen", 'dogwood (n.)', 'Spackle (n.)', 'festschrift (n.)', 'homogenization (n.)', 'visualize (v.)', 'Sacramento', 'troika (n.)', 'ceriph (n.)', 'latency (n.)', 'Yahweh', 'antagonise (v.)', 'disambiguation (n.)', 'squander (v.)', 'litre (n.)', 'red tape (n.)', 'pro (n.1)', 'unlink (v.)', 'Yosemite', 'dismemberment (n.)', 'immediacy (n.)', 'pipsqueak (n.)', 'larf', 'cyber', 'correlate (v.)', 'giaour (n.)', 'subjectivism (n.)', 'Abbassid', 'concurring (adj.)', 'wore', 'unaware (adj.)', 'hummer (n.)', 'disappointed (adj.)', 'blissful (adj.)', 'ameliorative (adj.)', 'succulence (n.)', 'voivode (n.)', 'bowery (n.)', 'keck (v.)', 'concentration (n.)', 'haze (n.)']
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Other? (12209)}
+
+  \begin{description}
+    \item[linguistic (adj.)] "of or pertaining to the study of language," 1824, from German linguistisch (1807); see linguist + -ic. 
+    \item[Nathan] masc. proper name, biblical prophet, from Hebrew Nathan, literally "he has given," from verb nathan, related to mattan "gift."
+    \item[consortia (n.)] plural of consortium
+    \item[quirky (adj.)] 1806, "shifty," from quirk + -y (2). Sense of "idiosyncratic" first recorded 1960. Related: Quirkily; quirkiness.
+    \item[mutagen (n.)] 1946, from mutation + -gen "thing that produces." Related: Mutagenic; mutagenesis; mutagenize.
+
+
+
+
+  \end{description}
+\end{frame}
+
+\section{Testing}
+
+\begin{frame}[fragile]{Testing dataset}
+  \pause
+
+  \textbf{The Brown Corpus}
+
+  \pause
+
+  \textasciitilde 1 million words
+
+  \pause
+
+  Categorized
+\end{frame}
+
+\begin{frame}[fragile]{Testing dataset}
+    \centerline{\includegraphics[width=10cm]{browncats.jpg}}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Testing dataset}
+\centering
+\begin{columns}
+  \column{.5*\textwidth}
+  \begin{tabular}{l l}
+    Tag & Meaning \\
+    \hline
+    . & (. ; ? *) \\
+    BER & are, art \\
+    BEZ & is \\
+    CC &  conjunction  \\
+    CD &  cardinal numeral  \\
+    CS &  subordinator \\
+    DO &  do \\
+    HVN & had  \\
+    IN &  preposition \\
+    JJ &  adjective \\
+    JJR & comparative adjective \\
+    JJS & superlative adjective \\
+    MD &  modal auxiliary  \\
+  \end{tabular}
+  \column{.5*\textwidth}
+  \begin{tabular}{l l}
+    Tag & Meaning \\
+    \hline
+    NN &  singular or mass noun \\
+    NNS & plural noun \\
+    NP &  proper noun \\
+    PN &  nominal pronoun  \\
+    PPL &  (myself) \\
+    PPLS &  (ourselves) \\
+    PPS & 3(he, she, it, one) \\
+    RN &  nominal adverb \\
+    UH &  interjection, exclamation \\
+    VB &  verb, base form \\
+    VBD & verb, past tense \\
+    VBN & verb, past participle \\
+    WQL & wh- qualifier \\
+  \end{tabular}
+
+  
+    
+\end{columns}    
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Testing dataset}
+  Problem: Etymonline uses the base form of every word, and a much simpler tag system
+
+  \pause
+
+  Fix: Big tag decomposer
+
+  \begin{enumerate}
+    \item Is the word in the dictionary alone? 
+    \item Is the word (lower case) in the dictionary alone? 
+    \item Is the word in the dictionary followed by `` (''
+    \item Reduce Brown POS tag (skip punctuation, B,H,V -> v, N -> n J -> adj)
+    \item Is the word with the tag in the dictionary? 
+    \item Is the word with the tag and a number in the dictionary? 
+    \item Change tags to wordnet format (adj -> a adv -> v)
+    \item Lemmatize and recurse (stopping at one recursion level)
+  \end{enumerate}
+  
+\end{frame}
+
+\section{Example Runs}
+
+\begin{frame}[fragile]{Reminder of Hypotheses from October}
+
+  \metroset{block=fill}
+  \begin{block}{Abstract}
+    I expect to see English literature as mostly Germanic, upwards of 60\%. In scientific texts, I expect to see Latin and Greek push out a lot of that English vocabulary, and French in legal texts
+  \end{block}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Political Article}
+  \pause
+
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{politicswords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{politicstokens.png}
+  \end{subfigure}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Unknown?}
+  
+
+  ('Hemphill', 'NP'), ('Frankford', 'NP-TL'), ("city's", 'NN\$'), ('\$344,000', 'NNS'), ('\$200,000', 'NNS'), ('Hemphill', 'NP'), ('Hughes', 'NP-TL'), ('impossibly', 'QL'), ('Hughes', 'NP'), ('Hemphill', 'NP'), ("Controller's", 'NN\$-TL'), ('investigation', 'NN'), ('\$172,400', 'NNS'), ('investigating', 'VBG'), ('its', 'PP\$'), ('V.', 'NP'), ('Varani', 'NP'), ('vouchers', 'NNS'), ('Varani', 'NP'), ('C.', 'NP'), ('Wagner', 'NP'), ('Hemphill', 'NP'), ('by', 'IN'), ('Berger', 'NP'), ('Wagner', 'NP'), ('PTC', 'NN'), ('its', 'PP\$'), ('Hughes', 'NP'), ('N.', 'JJ-TL'), ('2d', 'OD-TL'), ('St.', 'NN-TL'), ('Hughes', 'NP'), ('its', 'PP\$'), ('investigation', 'NN'), ('by', 'IN'), ('Hemphill', 'NP'), ('C.', 'NP'), ('Crumlish', 'NP'), ('Jr.', 'NP'), ('Hughes', 'NP'), ("Berger's", 'NP\$'), ('Hughes', 'NP'), ('U.', 'NP-TL'), ('S.', 'NP-TL'), ('Berger', 'NP'), ('mostly', 'RB'), ('involve', 'VB'), ('overhauling', 'NN'), ('Hemphill', 'NP'), ('Hemphill', 'NP'), ('Hughes', 'NP'), ('\$500', 'NNS'), ('A.', 'NP'), ('Belanger', 'NP'), ('Mass.', 'NP'), ('Hughes', 'NP'), ('\$600', 'NNS'), ('Hemphill', 'NP'), ('\$2400', 'NNS'), ('\$3100', 'NNS'), ("Berger's", 'NP\$'), ('by', 'IN'), ('Wagner', 'NP'), ('Wagner', 'NP'), ('\$37,500', 'NNS'), ('Hughes', 'NP'), ('know', 'VB'), ('Wagner', 'NP'), ('Berger', 'NP'), ('Wagner', 'NP'), ('just', 'RB'), ('\$172,000', 'NNS'), ('know', 'VB-HL'), ('Berger', 'NP'), ('know', 'VB'), ('M.', 'NP'), ('PTC', 'NN'), ('it', 'PPO'), ('known', 'VBN'), ('it', 'PPO'), ('PTC', 'NN'), ('investigating', 'VBG'), ('D.', 'NP'), ('Goodis', 'NP'), ('by', 'IN'), ('Goodis', 'NP'), ("Council's", 'NN\$-TL'), ('\$5000', 'NNS'), ('Goodis', 'NP'), ('\$740,000', 'NNS'), ('\$2,330,000', 'NNS'), ('multi-family', 'JJ'), ('dwellings', 'NNS'), ('\$5', 'NNS'), ('\$2', 'NNS'), ('\$1', 'NN'), ('Goodis', 'NP'), ('accomodations', 'NNS'), ('\$457,000', 'NNS'), ('by', 'IN'), ('Kaplan', 'NP'), ('Councilwoman', 'NN-TL'), ('Knauer', 'NP'), ('pedigreed', 'JJ'), ('\$1', 'NN'), ('\$2', 'NNS'), ('\$5', 'NNS'), ('Knauer', 'NP'), ("city's", 'NN\$'), ('R.', 'NP'), ('Leary', 'NP'), ('\$115,000', 'NNS'), ('\$43,000', 'NNS'), ("city's", 'NN\$'), ('\$67,000', 'NNS'), ("Women's", 'NNS\$-TL'), ('S.P.C.A.', 'NP-TL'),
+
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Romance Novel}
+
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{romancewords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{romancetokens.png}
+  \end{subfigure}
+  \end{figure}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Sci-Fi}
+
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{scifiwords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{scifitokens.png}
+  \end{subfigure}
+  \end{figure}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Religion}
+  
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{religionwords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{religiontokens.png}
+  \end{subfigure}
+  \end{figure}  
+\end{frame}
+
+\begin{frame}[fragile]{Law}
+  
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{lawwords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{lawtokens.png}
+  \end{subfigure}
+  \end{figure}  
+\end{frame}
+
+
+\begin{frame}[fragile]{Medical}
+  
+  \begin{figure}
+  \centering
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{medwords.png}
+  \end{subfigure}
+  \begin{subfigure}
+  \centering
+    \includegraphics[width=5cm]{medtokens.png}
+  \end{subfigure}
+  \end{figure}  
+\end{frame}
+
+\begin{frame}[fragile]{All Test Texts}
+  
+  \centerline{\includegraphics[width=13cm]{stackedbarsreversed.png}}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Next Steps}
+
+  \begin{itemize}[<+->]
+    \item Go to ACL
+    \item Word-only classifier
+    \item Tagger
+    \item User-friendly frontend
+    \item Advertisements
+    \item Reddit
+    \item \textbf{\$\$\$\$\$\$\$\$\$\$\$\$\$\$}
+  \end{itemize}
+
+
+  
+\end{frame}
+
+
+
+
+
+
+
+
+\end{document}
