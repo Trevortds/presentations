@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{System Administration | The Command Line}{28}{0}{1}
+\beamer@sectionintoc {2}{Team workflows | Personal task management}{37}{0}{2}
+\beamer@sectionintoc {3}{Docker, containerization, packaging | Git/Git-flow}{55}{0}{3}
+\beamer@sectionintoc {4}{Continuous Integration | Testing}{59}{0}{4}
+\beamer@sectionintoc {5}{Cluster computing | Functional programming}{62}{0}{5}
