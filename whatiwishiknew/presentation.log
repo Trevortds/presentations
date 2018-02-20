@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.2.15)  20 FEB 2018 15:17
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.2.15)  20 FEB 2018 15:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1805,7 +1805,12 @@ File: figs/gitflow.png Graphic file (type bmp)
 ]
 [80
 
-] [81
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\translate ' on input line 452.
+
+[81
 
 ] [82
 
@@ -1813,17 +1818,17 @@ File: figs/gitflow.png Graphic file (type bmp)
 
 ] [84
 
+] [85
+
 ]
 File: figs/pseboard.png Graphic file (type bmp)
 <figs/pseboard.png>
- [85
+ [86
 
 ]
 File: figs/apboard.png Graphic file (type bmp)
 <figs/apboard.png>
- [86
-
-] [87
+ [87
 
 ] [88
 
@@ -1831,52 +1836,52 @@ File: figs/apboard.png Graphic file (type bmp)
 
 ] [90
 
+] [91
+
 ]
 File: figs/asana.png Graphic file (type bmp)
 <figs/asana.png>
- [91
+ [92
 
 ]
 File: figs/todoist.png Graphic file (type bmp)
 <figs/todoist.png>
- [92
+ [93
 
 ]
 File: figs/habitica.png Graphic file (type bmp)
 <figs/habitica.png>
- [93
+ [94
 
 ]
 File: figs/trello.png Graphic file (type bmp)
 <figs/trello.png>
- [94
+ [95
 
 ]
 File: figs/todotxt.png Graphic file (type bmp)
 <figs/todotxt.png>
 
-[95
+[96
 
 ]
 File: figs/bulletjournal.jpeg Graphic file (type bmp)
 <figs/bulletjournal.jpeg>
 
-Overfull \vbox (34.7942pt too high) detected at line 524
+Overfull \vbox (34.7942pt too high) detected at line 529
  []
 
-[96
+[97
 
 ]
 File: figs/toggl.png Graphic file (type bmp)
 <figs/toggl.png>
- [97
+ [98
 
 ]
 File: figs/zapier.png Graphic file (type bmp)
 <figs/zapier.png>
- [98
-
-] [99
+ [99
 
 ] [100
 
@@ -1892,18 +1897,16 @@ File: figs/zapier.png Graphic file (type bmp)
 
 ] [106
 
+] [107
+
 ]
 File: figs/tmux.png Graphic file (type bmp)
 <figs/tmux.png>
- [107
+ [108
 
-] [108
+] [109
 
 ]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 601.
-
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
 
@@ -1913,20 +1916,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 606.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 606.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 610.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 610.
+
 (/home/trevor/github/presentations/whatiwishiknew/presentation.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 606.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 606.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 610.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 610.
  ) 
 Here is how much of TeX's memory you used:
- 45123 strings out of 492998
- 1042808 string characters out of 6136605
- 1399547 words of memory out of 5000000
- 48338 multiletter control sequences out of 15000+600000
+ 45139 strings out of 492998
+ 1042983 string characters out of 6136605
+ 1398547 words of memory out of 5000000
+ 48354 multiletter control sequences out of 15000+600000
  533726 words of font info for 56 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  71i,14n,108p,10436b,1631s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on /home/trevor/github/presentations/whatiwishiknew/presentation
-.pdf (108 pages).
+.pdf (109 pages).
