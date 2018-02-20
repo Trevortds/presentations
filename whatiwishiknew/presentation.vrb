@@ -1,98 +1,46 @@
-\frametitle{Use}
+\frametitle{Do it now: Functional programming}
 
-  \begin{figure}
-  \centering
-  \begin{subfigure}
-  \centering
-    \begin{tikzpicture}[scale=0.07]
-    \tikzstyle{every node}+=[inner sep=0pt]
-    \draw [black] (39.5,-6.7) circle (3);
-    \draw [black] (24.6,-14.7) circle (3);
-    \draw [black] (18.8,-22.4) circle (3);
-    \draw [black] (18.8,-32.6) circle (3);
-    \draw [black] (17.7,-49.3) circle (3);
-    \draw [black] (17.7,-49.3) circle (2.4);
-    \draw [black] (8.8,-45) circle (3);
-    \draw [black] (8.8,-45) circle (2.4);
-    \draw [black] (50.5,-13.4) circle (3);
-    \draw [black] (50.5,-23.5) circle (3);
-    \draw [black] (50.4,-32.6) circle (3);
-    \draw [black] (50.4,-32.6) circle (2.4);
-    \draw [black] (49.7,-43.7) circle (3);
-    \draw [black] (48.5,-53.3) circle (3);
-    \draw [black] (39.2,-54.2) circle (3);
-    \draw [black] (39.2,-54.2) circle (2.4);
-    \draw [black] (58.9,-39) circle (3);
-    \draw [black] (62.5,-48.4) circle (3);
-    \draw [black] (60.4,-57.1) circle (3);
-    \draw [black] (60.4,-57.1) circle (2.4);
-    \draw [black] (74.2,-53.7) circle (3);
-    \draw [black] (74.2,-53.7) circle (2.4);
-    \draw [black] (30.2,-45.6) circle (3);
-    \draw [black] (30.2,-45.6) circle (2.4);
-    \draw [black] (29.9,-27.5) circle (3);
-    \draw [black] (35.5,-36.7) circle (3);
-    \draw [black] (35.5,-36.7) circle (2.4);
-    \draw [black] (36.86,-8.12) -- (27.24,-13.28);
-    \fill [black] (27.24,-13.28) -- (28.18,-13.34) -- (27.71,-12.46);
-    \draw (30.83,-10.2) node [above] {$w$};
-    \draw [black] (22.8,-17.1) -- (20.6,-20);
-    \fill [black] (20.6,-20) -- (21.49,-19.67) -- (20.69,-19.06);
-    \draw (21.12,-17.15) node [left] {$o$};
-    \draw [black] (18.8,-25.4) -- (18.8,-29.6);
-    \fill [black] (18.8,-29.6) -- (19.3,-28.8) -- (18.3,-28.8);
-    \draw (18.3,-27.5) node [left] {$o$};
-    \draw [black] (18.6,-35.59) -- (17.9,-46.31);
-    \fill [black] (17.9,-46.31) -- (18.45,-45.54) -- (17.45,-45.48);
-    \draw (17.65,-40.91) node [left] {$f:2$};
-    \draw [black] (16.92,-34.94) -- (10.68,-42.66);
-    \fill [black] (10.68,-42.66) -- (11.57,-42.36) -- (10.8,-41.73);
-    \draw (13.24,-37.37) node [left] {$d:1$};
-    \draw [black] (20.78,-34.86) -- (28.22,-43.34);
-    \fill [black] (28.22,-43.34) -- (28.07,-42.41) -- (27.32,-43.07);
-    \draw (23.96,-40.55) node [left] {$l:3$};
-    \draw [black] (42.06,-8.26) -- (47.94,-11.84);
-    \fill [black] (47.94,-11.84) -- (47.51,-11) -- (46.99,-11.85);
-    \draw (44,-10.55) node [below] {$b$};
-    \draw [black] (50.5,-16.4) -- (50.5,-20.5);
-    \fill [black] (50.5,-20.5) -- (51,-19.7) -- (50,-19.7);
-    \draw (50,-18.45) node [left] {$a$};
-    \draw [black] (50.47,-26.5) -- (50.43,-29.6);
-    \fill [black] (50.43,-29.6) -- (50.94,-28.81) -- (49.94,-28.79);
-    \draw (49.93,-28.05) node [left] {$n:5$};
-    \draw [black] (52.8,-34.4) -- (56.5,-37.2);
-    \fill [black] (56.5,-37.2) -- (56.17,-36.31) -- (55.56,-37.11);
-    \draw (53.65,-36.3) node [below] {$n$};
-    \draw [black] (59.97,-41.8) -- (61.43,-45.6);
-    \fill [black] (61.43,-45.6) -- (61.61,-44.67) -- (60.67,-45.03);
-    \draw (59.95,-44.54) node [left] {$e$};
-    \draw [black] (61.8,-51.32) -- (61.1,-54.18);
-    \fill [black] (61.1,-54.18) -- (61.78,-53.52) -- (60.81,-53.29);
-    \draw (60.69,-52.32) node [left] {$d:7$};
-    \draw [black] (65.23,-49.64) -- (71.47,-52.46);
-    \fill [black] (71.47,-52.46) -- (70.94,-51.68) -- (70.53,-52.59);
-    \draw (66.77,-51.56) node [below] {$r:8$};
-    \draw [black] (50.21,-35.59) -- (49.89,-40.71);
-    \fill [black] (49.89,-40.71) -- (50.44,-39.94) -- (49.44,-39.88);
-    \draw (49.46,-38.11) node [left] {$a$};
-    \draw [black] (49.33,-46.68) -- (48.87,-50.32);
-    \fill [black] (48.87,-50.32) -- (49.47,-49.59) -- (48.48,-49.47);
-    \draw (48.43,-48.37) node [left] {$n$};
-    \draw [black] (45.51,-53.59) -- (42.19,-53.91);
-    \fill [black] (42.19,-53.91) -- (43.03,-54.33) -- (42.93,-53.34);
-    \draw (43.54,-53.11) node [above] {$a:6$};
-    \draw [black] (21.53,-23.65) -- (27.17,-26.25);
-    \fill [black] (27.17,-26.25) -- (26.66,-25.46) -- (26.24,-26.37);
-    \draw (23.59,-25.46) node [below] {$l$};
-    \draw [black] (31.46,-30.06) -- (33.94,-34.14);
-    \fill [black] (33.94,-34.14) -- (33.95,-33.19) -- (33.1,-33.71);
-    \draw (32.06,-33.37) node [left] {$f:4$};
-    \end{tikzpicture}
-  \end{subfigure}
+Cluster computing relies on functional programming, so you should definitiely be familiar with it.
+
+These two code samples do the same thing.
+
+\begin{columns}[T]
+  \begin{column}{.48\textwidth}
+  % \centerline{\includegraphics[width=6cm]{figs/slowpandasloop.png}}
+  \begin{lstlisting}[language=Python]
+for i, row in big_everything.iterrows():
+  if row.type == "Listings City":
+    big_everything[i,'jsonstuff'] = re.sub("displayValue\":(.*)\"", lambda m: case_fixer(m, True), row.jsonstuff)
+
+  else:
+    big_everything[i,'jsonstuff'] = re.sub("displayValue\":(.*)\"", lambda m: case_fixer(m, False), row.jsonstuff)
+
+  \end{lstlisting}
   \pause
-  \begin{subfigure}
-  % \includegraphics[width=5cm]{levautomaton.png}
+  10 hours
+  \end{column}
 
-  \end{subfigure}
-  \end{figure}
+  \pause
+
+
+  \begin{column}{.48\textwidth}
+  % \centerline{\includegraphics[width=6cm]{figs/fastpandasfunc.png}}
+  % \centerline{\includegraphics[width=6cm]{figs/slowpandasloop.png}}
+  \begin{lstlisting}[language=Python]
+def json_stuff_fixer(row):
+  if row.type == "Listings City":
+    return re.sub("displayValue\":(.*)\"", lambda m: case_fixer(m, True), row.jsonstuff)
+
+  else:
+    return re.sub("displayValue\":(.*)\"", lambda m: case_fixer(m, False), row.jsonstuff)
+
+
+big_everything['jsonstuff'] = big_everything.apply(json_stuff_fixer, axis=1)
+  \end{lstlisting}
+  \pause
+
+
+  4 minutes
+  \end{column}
+  \end{columns}
 
